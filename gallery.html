@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Ofentse Cooks</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Playball&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Ofentse Cooks</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="contact.html" class="btn btn-primary">Book Now</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Gallery</h1>
+            <p>Explore our culinary artistry through captivating images and videos</p>
+        </div>
+    </section>
+
+    <section class="gallery-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="active" data-filter="all">All Media</button>
+                <button data-filter="image">Images</button>
+                <button data-filter="video">Videos</button>
+                <button data-filter="weddings">Weddings</button>
+                <button data-filter="corporate">Corporate</button>
+                <button data-filter="private">Private Parties</button>
+                <button data-filter="food">Food Presentation</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-grid" id="mediaGallery">
+        <div class="container">
+            <div class="grid">
+                <a href="#" class="gallery-item" data-category="image weddings" data-type="image" data-src="img/wedding.jpg" data-caption="Traditional Botswana Wedding">
+                    <img src="img/weddingthumb.jpg" alt="Wedding Catering">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Traditional Botswana Wedding</p>
+                    </div>
+                </a>
+                <a href="#" class="gallery-item" data-category="image corporate" data-type="image" data-src="img/corporate.jpg" data-caption="Corporate Gala Dinner">
+                    <img src="img/corporate-1-thumb.jpg" alt="Corporate Event">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Corporate Gala Dinner</p>
+                    </div>
+                </a>
+                <a href="#" class="gallery-item" data-category="image private" data-type="image" data-src="img/private-1.jpg" data-caption="Birthday Celebration">
+                    <img src="img/private-1-thumb.jpg" alt="Private Party">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Birthday Celebration</p>
+                    </div>
+                </a>
+                <a href="#" class="gallery-item" data-category="image food" data-type="image" data-src="img/food-1.jpg" data-caption="Seswaa Presentation">
+                    <img src="img/food-1-thumb.jpg" alt="Food Presentation">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Seswaa Presentation</p>
+                    </div>
+                </a>
+                <a href="#" class="gallery-item" data-category="image weddings" data-type="image" data-src="img/wedding-2.jpg" data-caption="Modern Wedding Reception">
+                    <img src="img/wedding-2-thumb.jpg" alt="Wedding Catering">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Modern Wedding Reception</p>
+                    </div>
+                </a>
+                <a href="#" class="gallery-item" data-category="image corporate" data-type="image" data-src="img/corporate-2.jpg" data-caption="Conference Catering">
+                    <img src="img/corporate-2-thumb.jpg" alt="Corporate Event">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Conference Catering</p>
+                    </div>
+                </a>
+                <a href="#" class="gallery-item" data-category="image private" data-type="image" data-src="img/private-2.jpg" data-caption="Anniversary Party">
+                    <img src="img/private-2-thumb.jpg" alt="Private Party">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Anniversary Party</p>
+                    </div>
+                </a>
+                <a href="#" class="gallery-item" data-category="image food" data-type="image" data-src="img/food-2.jpg" data-caption="Bogobe Presentation">
+                    <img src="img/food-2-thumb.jpg" alt="Food Presentation">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                        <p>Bogobe Presentation</p>
+                    </div>
+                </a>
+
+                <a href="#" class="gallery-item video-item" data-category="video corporate" data-type="video" data-src="videos/corporate_event_highlight.mp4" data-caption="Corporate Event Highlights">
+                    <video muted preload="metadata" poster="img/video-thumbnail-corporate.jpg"></video>
+                    <div class="overlay">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Corporate Event Highlights</p>
+                    </div>
+                </a>
+                <a href="#" class="gallery-item video-item" data-category="video weddings" data-type="video" data-src="videos/wedding_behind_the_scenes.mp4" data-caption="Wedding Prep Behind-the-Scenes">
+                    <video muted preload="metadata" poster="img/video-thumbnail-wedding.jpg"></video>
+                    <div class="overlay">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Wedding Prep Behind-the-Scenes</p>
+                    </div>
+                </a>
+                <a href="#" class="gallery-item video-item" data-category="video food" data-type="video" data-src="videos/chef_cooking_demo.mp4" data-caption="Chef's Cooking Demonstration">
+                    <video muted preload="metadata" poster="img/video-thumbnail-cooking.jpg"></video>
+                    <div class="overlay">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Chef's Cooking Demonstration</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-cta">
+        <div class="container">
+            <h2>Ready to Create Your Own Memorable Event?</h2>
+            <p>Let us bring our culinary expertise to your next special occasion.</p>
+            <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-about">
+                <h3>Ofentse Cooks</h3>
+                <p>Premium catering services across Botswana, bringing culinary excellence to your special events.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/ofentse_cooks__/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://web.facebook.com/ofentse.gumede" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                    <a href="https://x.com/OfentseGumede" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Gaborone, Botswana</p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+26771234567">+267 71 234 567</a></p>
+                <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/26771234567" target="_blank" rel="noopener noreferrer">+267 71 234 567</a> (WhatsApp)</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@ofentsecooks.com">info@ofentsecooks.com</a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Ofentse Cooks. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div id="lightboxModal" class="modal">
+        <div class="modal-content lightbox-content">
+            <span class="close-button">&times;</span>
+            <button id="lightboxPrev" class="lightbox-nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <img id="lightboxImage" src="" alt="Gallery Image">
+            <video id="lightboxVideo" src="" controls></video>
+            <button id="lightboxNext" class="lightbox-nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            <p id="lightboxCaption"></p>
+        </div>
+    </div>
+
+    <button id="backToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>
