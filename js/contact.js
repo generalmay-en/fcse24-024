@@ -1,100 +1,69 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
-    const contactMessageDiv = document.getElementById('contactMessage');
-
-    if (contactForm && contactMessageDiv) {
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            contactMessageDiv.textContent = '';
-            contactMessageDiv.className = 'message';
-
-            const name = contactForm.querySelector('#name').value.trim();
-            const email = contactForm.querySelector('#email').value.trim();
-            const subject = contactForm.querySelector('#subject').value.trim();
-            const message = contactForm.querySelector('#message').value.trim();
-
-            if (!name || !email || !subject || !message) {
-                contactMessageDiv.textContent = 'Please fill in all fields.';
-                contactMessageDiv.classList.add('error');
-                return;
-            }
-
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                contactMessageDiv.textContent = 'Please enter a valid email address.';
-                contactMessageDiv.classList.add('error');
-                return;
-            }
-
-            contactMessageDiv.textContent = 'Sending message...';
-            contactMessageDiv.classList.add('info');
-
-            setTimeout(() => {
-                const isSuccess = Math.random() > 0.3;
-
-                if (isSuccess) {
-                    contactMessageDiv.textContent = 'Message sent successfully! We will get back to you soon.';
-                    contactMessageDiv.classList.remove('info');
-                    contactMessageDiv.classList.add('success');
-                    contactForm.reset();
-                } else {
-                    contactMessageDiv.textContent = 'Failed to send message. Please try again later.';
-                    contactMessageDiv.classList.remove('info');
-                    contactMessageDiv.classList.add('error');
-                }
-            }, 2000);
-        });
-    }
-
+    // Modal functionality
     const feedbackModal = document.getElementById('feedbackModal');
-    const openModalBtn = document.getElementById('openFeedbackModalBtn');
+    const openModalBtns = document.querySelectorAll('.btn-primary[href="contact.html"], #openFeedbackModalBtn');
     const closeModalBtn = document.querySelector('#feedbackModal .close-button');
     const feedbackForm = document.getElementById('feedbackForm');
-    const feedbackMessageDiv = document.getElementById('feedbackMessage');
     const ratingInputs = document.querySelectorAll('#feedbackForm input[name="rating"]');
     const ratingLabels = document.querySelectorAll('#feedbackForm .rating label');
 
-    if (openModalBtn && feedbackModal && closeModalBtn) {
-        openModalBtn.addEventListener('click', function() {
-            feedbackModal.style.display = 'flex';
+    // Function to open modal
+    function openModal() {
+        feedbackModal.style.display = 'flex';
+        setTimeout(() => {
             feedbackModal.classList.add('show');
-        });
+        }, 10);
+    }
 
-        closeModalBtn.addEventListener('click', function() {
-            feedbackModal.classList.remove('show');
-            setTimeout(() => {
-                feedbackModal.style.display = 'none';
-                feedbackForm.reset();
-                feedbackMessageDiv.textContent = '';
-                ratingLabels.forEach(label => {
-                    label.style.color = '#ddd';
-                });
-            }, 300);
-        });
+    // Function to close modal
+    function closeModal() {
+        feedbackModal.classList.remove('show');
+        setTimeout(() => {
+            feedbackModal.style.display = 'none';
+            if (feedbackForm) feedbackForm.reset();
+            ratingLabels.forEach(label => {
+                label.style.color = '#ddd';
+            });
+        }, 300);
+    }
 
-        window.addEventListener('click', function(event) {
-            if (event.target === feedbackModal) {
-                feedbackModal.classList.remove('show');
-                setTimeout(() => {
-                    feedbackModal.style.display = 'none';
-                    feedbackForm.reset();
-                    feedbackMessageDiv.textContent = '';
-                    ratingLabels.forEach(label => {
-                        label.style.color = '#ddd';
-                    });
-                }, 300);
-            }
-        });
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && feedbackModal.classList.contains('show')) {
-                closeModalBtn.click();
-            }
+    // Add event listeners to all buttons that should open the modal
+    if (openModalBtns.length > 0) {
+        openModalBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // If it's a link, prevent default behavior
+                if (btn.tagName === 'A') {
+                    e.preventDefault();
+                }
+                openModal();
+            });
         });
     }
 
+    // Close modal when clicking X button
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target === feedbackModal) {
+            closeModal();
+        }
+    });
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && feedbackModal.classList.contains('show')) {
+            closeModal();
+        }
+    });
+
+    // Rating stars interaction
     if (ratingInputs.length > 0 && ratingLabels.length > 0) {
-        ratingLabels.forEach(label => {
+        ratingLabels.forEach((label, index) => {
+            label.setAttribute('data-value', index + 1);
+            
             label.addEventListener('mouseover', function() {
                 const value = this.getAttribute('data-value');
                 ratingLabels.forEach(lbl => {
@@ -130,61 +99,78 @@ document.addEventListener('DOMContentLoaded', function() {
                         input.checked = true;
                     }
                 });
-                ratingLabels.forEach(lbl => {
-                    if (parseInt(lbl.getAttribute('data-value')) <= parseInt(value)) {
-                        lbl.style.color = '#ffc107';
-                    } else {
-                        lbl.style.color = '#ddd';
-                    }
-                });
             });
         });
     }
 
-    if (feedbackForm && feedbackMessageDiv) {
+    // Feedback form submission
+    if (feedbackForm) {
         feedbackForm.addEventListener('submit', function(event) {
             event.preventDefault();
 
-            feedbackMessageDiv.textContent = '';
-            feedbackMessageDiv.className = 'message';
-
-            const name = feedbackForm.querySelector('#feedbackName').value.trim();
-            const email = feedbackForm.querySelector('#feedbackEmail').value.trim();
+            const name = feedbackForm.querySelector('#feedback-name').value.trim();
+            const email = feedbackForm.querySelector('#feedback-email').value.trim();
             const rating = feedbackForm.querySelector('input[name="rating"]:checked');
-            const comments = feedbackForm.querySelector('#feedbackComments').value.trim();
+            const message = feedbackForm.querySelector('#feedback-message').value.trim();
 
-            if (!name || !email || !rating || !comments) {
-                feedbackMessageDiv.textContent = 'Please fill in all fields and provide a rating.';
-                feedbackMessageDiv.classList.add('error');
+            // Simple validation
+            if (!name || !rating || !message) {
+                alert('Please fill in all required fields and provide a rating.');
                 return;
             }
 
+            if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // This typically send the data to a server
+            console.log('Feedback submitted:', { name, email, rating: rating.value, message });
+            
+            // Show success message
+            alert('Thank you for your feedback!');
+            
+            // Reset form and close modal
+            feedbackForm.reset();
+            closeModal();
+        });
+    }
+
+    // Booking form submission (if exists)
+    const bookingForm = document.getElementById('bookingForm');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Validate form
+            const name = bookingForm.querySelector('#name').value.trim();
+            const email = bookingForm.querySelector('#email').value.trim();
+            const phone = bookingForm.querySelector('#phone').value.trim();
+            const eventType = bookingForm.querySelector('#event').value;
+            const date = bookingForm.querySelector('#date').value;
+            const guests = bookingForm.querySelector('#guests').value;
+            
+            if (!name || !email || !phone || !eventType || !date || !guests) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                feedbackMessageDiv.textContent = 'Please enter a valid email address.';
-                feedbackMessageDiv.classList.add('error');
+                alert('Please enter a valid email address.');
                 return;
             }
-
-            feedbackMessageDiv.textContent = 'Submitting feedback...';
-            feedbackMessageDiv.classList.add('info');
-
-            setTimeout(() => {
-                const isSuccess = Math.random() > 0.3;
-
-                if (isSuccess) {
-                    feedbackMessageDiv.textContent = 'Thank you for your feedback!';
-                    feedbackMessageDiv.classList.remove('info');
-                    feedbackMessageDiv.classList.add('success');
-                    feedbackForm.reset();
-                    ratingLabels.forEach(label => {
-                        label.style.color = '#ddd';
-                    });
-                } else {
-                    feedbackMessageDiv.textContent = 'Failed to submit feedback. Please try again.';
-                    feedbackMessageDiv.classList.remove('info');
-                    feedbackMessageDiv.classList.add('error');
-                }
-            }, 2000);
+            
+            // Here you would typically send the booking data to a server
+            console.log('Booking submitted:', { 
+                name, email, phone, eventType, date, guests,
+                message: bookingForm.querySelector('#message').value.trim()
+            });
+            
+            // Show success message
+            alert('Thank you for your booking inquiry! We will contact you soon.');
+            
+            // Reset form
+            bookingForm.reset();
         });
     }
 });
